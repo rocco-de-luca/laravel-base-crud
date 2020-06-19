@@ -13,15 +13,15 @@
         @csrf
         @method('POST')
         <div class="form-group">
-            <input type="text" class="form-control"
+        <input type="text" class="form-control" vlaue="{{old('name')}}"
             name="name" placeholder="detail name">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control"
+            <input type="text" class="form-control" vlaue="{{old('gf')}}"
             name="gf" placeholder="detail gf">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control"
+            <input type="text" class="form-control" vlaue="{{old('assist')}}"
             name="assist" placeholder="detail assist">
         </div>
         <input class="btn btn-primary" type="submit" value="Create">

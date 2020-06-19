@@ -48,9 +48,10 @@ class DetailController extends Controller
 
         // save new detail on DB
         $detail = new Detail();
-        $detail->name = $data['name'];
-        $detail->gf = $data['gf']; 
-        $detail->assist = $data['assist']; 
+        //$detail->name = $data['name'];
+        //$detail->gf = $data['gf']; 
+        //$detail->assist = $data['assist']; 
+        $detail->fill($data);
         $saved = $detail->save();
         
         // redirect to show route
