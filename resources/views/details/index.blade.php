@@ -22,7 +22,9 @@
                     <td>
                     <a class="btn btn-success" href="{{route('details.show', $detail->id)}}">Show</a>
                     </td>
-                    <td>Update</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{route('details.edit', $detail->id)}}">Edit</a>
+                    </td>
                     <td>Delete</td>
                 </tr>
             @endforeach

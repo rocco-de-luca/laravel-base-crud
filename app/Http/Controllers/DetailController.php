@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Detail;
+use Illuminate\Validation\Rule;
 
 class DetailController extends Controller
 {
@@ -40,11 +41,7 @@ class DetailController extends Controller
 
         // validazione
 
-        $request->validate([
-            'name' => 'required',
-            'gf' => 'required',
-            'assist' => 'required'
-        ]);
+        $request->validate($this->validationRules());
 
         // save new detail on DB
         $detail = new Detail();
@@ -78,9 +75,9 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Detail $detail)
     {
-        //
+        return view('details.edit', compact('detail'));
     }
 
     /**
@@ -90,9 +87,18 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Detail $detail)
     {
-        //
+        $data = $request->all();
+        
+        // validazione
+        $request->validate($this->validationRules($detail->id));
+        // update data on DB
+        $updated = $detail->update($data);
+        //redirect
+        if($updated){
+            return redirect()->route('details.show', $detail->id);
+        }
     }
 
     /**
@@ -105,4 +111,21 @@ class DetailController extends Controller
     {
         //
     }
+
+// define validation rules
+private function validationRules($id = null)
+{
+    return [
+        'name' =>[ 
+            'required',
+            'max:20',
+            Rule::unique('details')->ignore($id)
+        ],
+        'gf' => 'required',
+        'assist' => 'required'
+    ];
 }
+
+}
+
+
