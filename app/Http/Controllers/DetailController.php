@@ -107,9 +107,17 @@ class DetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Detail $detail)
     {
-        //
+        // ref entity to be deteted
+        $ref = $detail->name;
+        //delete
+        $deleted = $detail->delete();
+
+        // redirect with section data
+        if($deleted){
+            return redirect()->route('details.index')->with('deleted', $ref);
+        }
     }
 
 // define validation rules

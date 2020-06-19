@@ -1,5 +1,10 @@
 @extends('layouts.main')
 @section('main-content')
+@if (session('deleted'))
+   <div class="alert alert-success"> 
+    {{session('deleted')}} was delete 
+    </div>
+@endif
     <h1 class="mb-4">Details</h1>
     <section class="Details">
         <table class="table">
@@ -25,7 +30,14 @@
                     <td>
                         <a class="btn btn-primary" href="{{route('details.edit', $detail->id)}}">Edit</a>
                     </td>
-                    <td>Delete</td>
+                    <td>
+                    <form action="{{route('details.destroy', $detail->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
