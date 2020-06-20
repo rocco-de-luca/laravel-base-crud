@@ -21,7 +21,7 @@ class PlayersTableSeeder extends Seeder
         for($i = 0; $i < $records; $i++){
            $newPlayer = new Player();
            $newPlayer->name = $faker->name;
-           $newPlayer->club = $faker->name;
+           $newPlayer->club = $faker->country;
            $newPlayer->save();
         }
     }
